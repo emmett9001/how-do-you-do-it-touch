@@ -249,6 +249,7 @@
 		AA322C0B192C1C5F00E7978A /* b2PulleyJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE3192C1C5F00E7978A /* b2PulleyJoint.cpp */; };
 		AA322C0C192C1C5F00E7978A /* b2RevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE5192C1C5F00E7978A /* b2RevoluteJoint.cpp */; };
 		AA322C0D192C1C5F00E7978A /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE7192C1C5F00E7978A /* b2WeldJoint.cpp */; };
+		AAF0C198193A48EE002EA6DD /* mainbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF0C197193A48EE002EA6DD /* mainbg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -763,6 +764,7 @@
 		AA322BE6192C1C5F00E7978A /* b2RevoluteJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2RevoluteJoint.h; sourceTree = "<group>"; };
 		AA322BE7192C1C5F00E7978A /* b2WeldJoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2WeldJoint.cpp; sourceTree = "<group>"; };
 		AA322BE8192C1C5F00E7978A /* b2WeldJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WeldJoint.h; sourceTree = "<group>"; };
+		AAF0C197193A48EE002EA6DD /* mainbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainbg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -823,6 +825,7 @@
 		AA322883192C19EB00E7978A /* hdydi_touch */ = {
 			isa = PBXGroup;
 			children = (
+				AAF0C196193A48EE002EA6DD /* Assets */,
 				AA322884192C19EB00E7978A /* Resources */,
 				AA3228AD192C19EB00E7978A /* Libraries */,
 				AA322B12192C19EF00E7978A /* Classes */,
@@ -1790,6 +1793,14 @@
 			path = Joints;
 			sourceTree = "<group>";
 		};
+		AAF0C196193A48EE002EA6DD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				AAF0C197193A48EE002EA6DD /* mainbg.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1871,6 +1882,7 @@
 				AA3228A1192C19EB00E7978A /* Icon-Small.png in Resources */,
 				AA322BE9192C1C5F00E7978A /* Box2DConfig.cmake in Resources */,
 				AA322BEA192C1C5F00E7978A /* CMakeLists.txt in Resources */,
+				AAF0C198193A48EE002EA6DD /* mainbg.png in Resources */,
 				AA32289F192C19EB00E7978A /* Icon-Small-50.png in Resources */,
 				AA322A88192C19EE00E7978A /* LICENSE_Kazmath.txt in Resources */,
 				AA322893192C19EB00E7978A /* Icon-72.png in Resources */,
@@ -2268,6 +2280,7 @@
 				AA322B20192C19EF00E7978A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA322B21192C19EF00E7978A /* Build configuration list for PBXNativeTarget "hdydi_touch" */ = {
 			isa = XCConfigurationList;
@@ -2276,6 +2289,7 @@
 				AA322B23192C19EF00E7978A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
