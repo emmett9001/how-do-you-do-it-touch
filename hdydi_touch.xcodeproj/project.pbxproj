@@ -251,6 +251,7 @@
 		AA322C0D192C1C5F00E7978A /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE7192C1C5F00E7978A /* b2WeldJoint.cpp */; };
 		AAF0C19D193A4EE1002EA6DD /* sprites_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF0C19B193A4EE1002EA6DD /* sprites_default.plist */; };
 		AAF0C19E193A4EE1002EA6DD /* sprites_default.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF0C19C193A4EE1002EA6DD /* sprites_default.png */; };
+		AAF0C1A1193A57DD002EA6DD /* PhysicsDoll.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAF0C1A0193A57DD002EA6DD /* PhysicsDoll.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -767,6 +768,8 @@
 		AA322BE8192C1C5F00E7978A /* b2WeldJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WeldJoint.h; sourceTree = "<group>"; };
 		AAF0C19B193A4EE1002EA6DD /* sprites_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sprites_default.plist; sourceTree = "<group>"; };
 		AAF0C19C193A4EE1002EA6DD /* sprites_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites_default.png; sourceTree = "<group>"; };
+		AAF0C19F193A57DD002EA6DD /* PhysicsDoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsDoll.h; path = Classes/PhysicsDoll.h; sourceTree = "<group>"; };
+		AAF0C1A0193A57DD002EA6DD /* PhysicsDoll.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PhysicsDoll.mm; path = Classes/PhysicsDoll.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1660,6 +1663,8 @@
 				AA322B14192C19EF00E7978A /* AppDelegate.mm */,
 				AA322B16192C19EF00E7978A /* HelloWorldScene.h */,
 				AA322B17192C19EF00E7978A /* HelloWorldScene.mm */,
+				AAF0C19F193A57DD002EA6DD /* PhysicsDoll.h */,
+				AAF0C1A0193A57DD002EA6DD /* PhysicsDoll.mm */,
 				AA322B19192C19EF00E7978A /* IntroScene.h */,
 				AA322B1A192C19EF00E7978A /* IntroScene.mm */,
 			);
@@ -1912,6 +1917,7 @@
 			files = (
 				AA32291A192C19EC00E7978A /* CCParticleBatchNode.m in Sources */,
 				AA322A92192C19EE00E7978A /* CCBReader.m in Sources */,
+				AAF0C1A1193A57DD002EA6DD /* PhysicsDoll.mm in Sources */,
 				AA322BEC192C1C5F00E7978A /* b2CollideCircle.cpp in Sources */,
 				AA322A42192C19EE00E7978A /* CCButton.m in Sources */,
 				AA3229ED192C19ED00E7978A /* OALAudioActions.m in Sources */,

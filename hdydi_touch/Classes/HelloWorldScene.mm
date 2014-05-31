@@ -11,6 +11,8 @@
 #import "IntroScene.h"
 #import <Box2D/Box2D.h>
 
+#define PTM_RATIO 32
+
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
 // -----------------------------------------------------------------------
@@ -19,6 +21,8 @@
 {
     CCSprite *background, *girlBody, *girlFace;
     CCSpriteBatchNode *spriteSheet;
+    
+    b2World *_world;
 }
 
 // -----------------------------------------------------------------------
@@ -39,6 +43,8 @@
     
     self.userInteractionEnabled = YES;
     
+    [self setupWorld];
+    
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_default.plist"];
     spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"sprites_default.png"];
     [self addChild:spriteSheet];
@@ -56,6 +62,26 @@
     [self addChild:girlFace];
     
 	return self;
+}
+
+-(void) draw {
+    _world->DrawDebugData();
+}
+
+- (void)setupWorld {
+    b2Vec2 gravity = b2Vec2(0, 9.8);
+    _world = new b2World(gravity, true);
+    
+    /*GLESDraw *m_debugDraw = new GLESDraw( PTM_RATIO );
+    uint32 flags = 0;
+    flags += b2DebugDraw::e_shapeBit;
+    flags += b2DebugDraw::e_jointBit;
+    flags += b2DebugDraw::e_aabbBit;
+    flags += b2DebugDraw::e_pairBit;
+    flags += b2DebugDraw::e_centerOfMassBit;
+    m_debugDraw->SetFlags(flags);
+    
+    _world->SetDebugDraw(m_debugDraw);*/
 }
 
 // -----------------------------------------------------------------------

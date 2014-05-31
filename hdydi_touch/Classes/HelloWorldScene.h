@@ -22,6 +22,9 @@
 
 + (HelloWorldScene *)scene;
 - (id)init;
+- (void)setupWorld;
+- (void)draw;
+- (void)tick;
 
 // -----------------------------------------------------------------------
 @end
