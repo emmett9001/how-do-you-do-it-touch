@@ -17,7 +17,8 @@
 
 @implementation HelloWorldScene
 {
-    CCSprite *_sprite;
+    CCSprite *background, *girlBody, *girlFace;
+    CCSpriteBatchNode *spriteSheet;
 }
 
 // -----------------------------------------------------------------------
@@ -33,19 +34,27 @@
 
 - (id)init
 {
-    // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
-    // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    // Add a sprite
-    _sprite = [CCSprite spriteWithImageNamed:@"mainbg.png"];
-    _sprite.position  = ccp(self.contentSize.width/2, self.contentSize.height-100);
-    [self addChild:_sprite];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_default.plist"];
+    spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"sprites_default.png"];
+    [self addChild:spriteSheet];
+    
+    background = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"mainbg.png"]];
+    background.position = ccp(self.contentSize.width/2, self.contentSize.height - 100);
+    [self addChild:background];
+    
+    girlBody = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"girl_body.png"]];
+    girlBody.position = ccp(girlBody.contentSize.width / 2, girlBody.contentSize.height / 2);
+    [self addChild:girlBody];
 
-    // done
+    girlFace = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"faces_3.png"]];
+    girlFace.position = ccp(girlBody.position.x + 20, girlBody.position.y + 120);
+    [self addChild:girlFace];
+    
 	return self;
 }
 
