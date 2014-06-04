@@ -62,6 +62,7 @@
     [self addChild:girlFace];
     
     self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie];
+    self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen];
     
 	return self;
 }
