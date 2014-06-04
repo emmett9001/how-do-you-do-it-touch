@@ -11,14 +11,20 @@
 #import <Box2D/Box2D.h>
 
 typedef enum _dollType {
-    barbie, ken
+    kBarbie, kKen
 } kDollType;
 
 @interface PhysicsDoll : NSObject
 {
     b2World *m_world;
+    CCScene *scene;
+    kDollType type;
+    
+    CCSprite *headSprite, *chestSprite, *hipsSprite, *armLSprite, *armRSprite, *legLSprite,
+             *legRSprite, *footLSprite, *footRSprite;
 }
 
-- (PhysicsDoll *)init:(CCScene *)scene withWorld:(b2World *)world andType:(kDollType)type;
+- (PhysicsDoll *)init:(CCScene *)scene withWorld:(NSValue *)world andType:(kDollType)type;
+- (void)setupSprites;
 
 @end

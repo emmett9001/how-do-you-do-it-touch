@@ -61,6 +61,8 @@
     girlFace.position = ccp(girlBody.position.x + 20, girlBody.position.y + 120);
     [self addChild:girlFace];
     
+    self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie];
+    
 	return self;
 }
 
