@@ -39,6 +39,7 @@
     
     circ = new b2CircleShape();
     circ->m_radius = 20 / PTM_RATIO;
+    fixtureDef.shape = circ;
     fixtureDef.density = 1.0;
     fixtureDef.friction = 0.4;
     fixtureDef.restitution = 0.3;
@@ -50,7 +51,7 @@
     }
     bodyDef.position.Set(startX / PTM_RATIO, (startY - headY) / PTM_RATIO);
     headBody = self->m_world->CreateBody(&bodyDef);
-    //headBody->CreateFixture(&fixtureDef);
+    headBody->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = NO;
 }
 
