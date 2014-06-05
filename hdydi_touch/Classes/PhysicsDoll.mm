@@ -16,9 +16,42 @@
         self->scene = _scene;
         self->type = _type;
         
+        [self setupBodies];
         [self setupSprites];
     }
     return self;
+}
+
+-(void)update {
+    headSprite.position = ccp(headBody->GetPosition().x, headBody->GetPosition().y);
+    headSprite.rotation = headBody->GetAngle() * (180 / M_PI);
+}
+
+-(void)setupBodies {
+    float startX = 100, startY = 100;
+    b2CircleShape *circ;
+    b2PolygonShape *box;
+    b2BodyDef bodyDef = b2BodyDef();
+    b2RevoluteJointDef jointDef = b2RevoluteJointDef();
+    b2FixtureDef fixtureDef = b2FixtureDef();
+    
+    bodyDef.type = b2_dynamicBody;
+    
+    circ = new b2CircleShape();
+    circ->m_radius = 20 / PTM_RATIO;
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.4;
+    fixtureDef.restitution = 0.3;
+    fixtureDef.isSensor = YES;
+    fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kHead];
+    float headY = 10;
+    if (self->type == kKen) {
+        headY = 30;
+    }
+    bodyDef.position.Set(startX / PTM_RATIO, (startY - headY) / PTM_RATIO);
+    headBody = self->m_world->CreateBody(&bodyDef);
+    //headBody->CreateFixture(&fixtureDef);
+    fixtureDef.isSensor = NO;
 }
 
 -(void)setupSprites {

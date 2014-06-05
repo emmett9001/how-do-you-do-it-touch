@@ -11,8 +11,6 @@
 #import "IntroScene.h"
 #import <Box2D/Box2D.h>
 
-#define PTM_RATIO 32
-
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
 // -----------------------------------------------------------------------
@@ -64,7 +62,16 @@
     self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie];
     self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen];
     
+    [self schedule:@selector(tick:) interval:.03f];
+    
 	return self;
+}
+
+-(void) tick:(float)dt {
+    self->_world->Step(1.0f/60.0f, 10, 8);
+    
+    [self->barbie update];
+    [self->ken update];
 }
 
 -(void) draw {
@@ -72,7 +79,7 @@
 }
 
 - (void)setupWorld {
-    b2Vec2 gravity = b2Vec2(0, 9.8);
+    b2Vec2 gravity = b2Vec2(0, -9.8);
     _world = new b2World(gravity, true);
     
     /*GLESDraw *m_debugDraw = new GLESDraw( PTM_RATIO );

@@ -10,9 +10,15 @@
 #import "cocos2d.h"
 #import <Box2D/Box2D.h>
 
+#define PTM_RATIO 32
+
 typedef enum _dollType {
     kBarbie, kKen
 } kDollType;
+
+typedef enum _collisionCategory {
+    kHead, kHandL, kHandR, kGroin
+} kCollisionCategory;
 
 @interface PhysicsDoll : NSObject
 {
@@ -22,9 +28,13 @@ typedef enum _dollType {
     
     CCSprite *headSprite, *chestSprite, *hipsSprite, *armLSprite, *armRSprite, *legLSprite,
              *legRSprite, *footLSprite, *footRSprite;
+    
+    b2Body *headBody, *torsoBody, *armLBody, *armRBody, *legLBody, *legRBody, *footLBody, *footRBody;
 }
 
 - (PhysicsDoll *)init:(CCScene *)scene withWorld:(NSValue *)world andType:(kDollType)type;
 - (void)setupSprites;
+- (void)setupBodies;
+- (void)update;
 
 @end
