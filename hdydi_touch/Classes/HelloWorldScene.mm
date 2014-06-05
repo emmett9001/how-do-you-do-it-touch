@@ -59,8 +59,8 @@
     girlFace.position = ccp(girlBody.position.x + 20, girlBody.position.y + 120);
     [self addChild:girlFace];
     
-    self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie];
-    self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen];
+    self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie andStartPos:CGPointMake(100, 100)];
+    self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen andStartPos:CGPointMake(200, 100)];
     
     [self schedule:@selector(tick:) interval:.03f];
     

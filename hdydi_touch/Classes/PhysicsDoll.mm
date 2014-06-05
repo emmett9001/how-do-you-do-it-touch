@@ -10,11 +10,12 @@
 
 @implementation PhysicsDoll
 
--(PhysicsDoll *)init:(CCScene *)_scene withWorld:(NSValue *)world andType:(kDollType)_type {
+-(PhysicsDoll *)init:(CCScene *)_scene withWorld:(NSValue *)world andType:(kDollType)_type andStartPos:(CGPoint)_startPos {
     if (self = [super init]) {
         self->m_world = (b2World *)[world pointerValue];
         self->scene = _scene;
         self->type = _type;
+        self->startPos = _startPos;
         
         [self setupBodies];
         [self setupSprites];
@@ -23,12 +24,18 @@
 }
 
 -(void)update {
-    headSprite.position = ccp(headBody->GetPosition().x, headBody->GetPosition().y);
+    headSprite.position = ccp(headBody->GetPosition().x * PTM_RATIO, headBody->GetPosition().y * PTM_RATIO);
     headSprite.rotation = headBody->GetAngle() * (180 / M_PI);
+    
+    chestSprite.position = ccp(torsoTopBody->GetPosition().x * PTM_RATIO, torsoTopBody->GetPosition().y * PTM_RATIO);
+    chestSprite.rotation = torsoTopBody->GetAngle() * (180 / M_PI);
+    
+    hipsSprite.position = ccp(torsoBottomBody->GetPosition().x * PTM_RATIO, torsoBottomBody->GetPosition().y * PTM_RATIO);
+    hipsSprite.rotation = torsoBottomBody->GetAngle() * (180 / M_PI);
 }
 
 -(void)setupBodies {
-    float startX = 100, startY = 100;
+    float startX = self->startPos.x, startY = self->startPos.y;
     b2CircleShape *circ = new b2CircleShape();
     b2PolygonShape *box = new b2PolygonShape();
     b2BodyDef bodyDef = b2BodyDef();
@@ -50,7 +57,7 @@
     if (self->type == kKen) {
         headY = 30;
     }
-    bodyDef.position.Set(startX / PTM_RATIO, (startY - headY) / PTM_RATIO);
+    bodyDef.position.Set(startX / PTM_RATIO, (startY + headY) / PTM_RATIO);
     headBody = self->m_world->CreateBody(&bodyDef);
     headBody->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = NO;
@@ -65,7 +72,7 @@
     filterData.maskBits = kTorsoMask;
     filterData.categoryBits = kTorsoCat;
     fixtureDef.filter = filterData;
-    bodyDef.position.Set(startX / PTM_RATIO, (startY + 28) / PTM_RATIO);
+    bodyDef.position.Set(startX / PTM_RATIO, (startY - 28) / PTM_RATIO);
     torsoTopBody = self->m_world->CreateBody(&bodyDef);
     torsoTopBody->CreateFixture(&fixtureDef);
     
@@ -73,7 +80,7 @@
     box = new b2PolygonShape();
     box->SetAsBox(22.0f / PTM_RATIO, 22.0f / PTM_RATIO);
     fixtureDef.shape = box;
-    bodyDef.position.Set(startX / PTM_RATIO, (startY + 85) / PTM_RATIO);
+    bodyDef.position.Set(startX / PTM_RATIO, (startY - 85) / PTM_RATIO);
     bodyDef.fixedRotation = true;
     torsoBottomBody = self->m_world->CreateBody(&bodyDef);
     torsoBottomBody->CreateFixture(&fixtureDef);
@@ -84,7 +91,7 @@
     box = new b2PolygonShape();
     box->SetAsBox(15.0f / PTM_RATIO, 10.0f / PTM_RATIO);
     fixtureDef.shape = box;
-    bodyDef.position.Set(startX / PTM_RATIO, (startY + 115) / PTM_RATIO);
+    bodyDef.position.Set(startX / PTM_RATIO, (startY - 115) / PTM_RATIO);
     groinSensor = self->m_world->CreateBody(&bodyDef);
     fixtureDef.isSensor = true;
     fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kGroin];

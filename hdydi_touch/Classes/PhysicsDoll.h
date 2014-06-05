@@ -36,9 +36,11 @@ typedef enum _collisionFilters {
     
     b2Body *headBody, *torsoTopBody, *torsoBottomBody, *armLBody, *armRBody, *legLBody, *legRBody, *footLBody, *footRBody, *groinSensor;
     b2Body *midriff;
+    
+    CGPoint startPos;
 }
 
-- (PhysicsDoll *)init:(CCScene *)scene withWorld:(NSValue *)world andType:(kDollType)type;
+- (PhysicsDoll *)init:(CCScene *)scene withWorld:(NSValue *)world andType:(kDollType)type andStartPos:(CGPoint)_startPos;
 - (void)setupSprites;
 - (void)setupBodies;
 - (void)update;
