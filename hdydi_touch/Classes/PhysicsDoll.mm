@@ -29,15 +29,16 @@
 
 -(void)setupBodies {
     float startX = 100, startY = 100;
-    b2CircleShape *circ;
-    b2PolygonShape *box;
+    b2CircleShape *circ = new b2CircleShape();
+    b2PolygonShape *box = new b2PolygonShape();
     b2BodyDef bodyDef = b2BodyDef();
     b2RevoluteJointDef jointDef = b2RevoluteJointDef();
     b2FixtureDef fixtureDef = b2FixtureDef();
+    b2Filter filterData = b2Filter();
     
     bodyDef.type = b2_dynamicBody;
     
-    circ = new b2CircleShape();
+    // HEAD
     circ->m_radius = 20 / PTM_RATIO;
     fixtureDef.shape = circ;
     fixtureDef.density = 1.0;
@@ -53,6 +54,42 @@
     headBody = self->m_world->CreateBody(&bodyDef);
     headBody->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = NO;
+    
+    // TORSO TOP
+    box->SetAsBox(30.0f / PTM_RATIO, 30.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.4;
+    fixtureDef.restitution = 0.1;
+    filterData = b2Filter();
+    filterData.maskBits = kTorsoMask;
+    filterData.categoryBits = kTorsoCat;
+    fixtureDef.filter = filterData;
+    bodyDef.position.Set(startX / PTM_RATIO, (startY + 28) / PTM_RATIO);
+    torsoTopBody = self->m_world->CreateBody(&bodyDef);
+    torsoTopBody->CreateFixture(&fixtureDef);
+    
+    // TORSO BOTTOM
+    box = new b2PolygonShape();
+    box->SetAsBox(22.0f / PTM_RATIO, 22.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set(startX / PTM_RATIO, (startY + 85) / PTM_RATIO);
+    bodyDef.fixedRotation = true;
+    torsoBottomBody = self->m_world->CreateBody(&bodyDef);
+    torsoBottomBody->CreateFixture(&fixtureDef);
+    bodyDef.fixedRotation = false;
+    self->midriff = torsoBottomBody;
+    
+    // GROIN COLLIDER
+    box = new b2PolygonShape();
+    box->SetAsBox(15.0f / PTM_RATIO, 10.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set(startX / PTM_RATIO, (startY + 115) / PTM_RATIO);
+    groinSensor = self->m_world->CreateBody(&bodyDef);
+    fixtureDef.isSensor = true;
+    fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kGroin];
+    groinSensor->CreateFixture(&fixtureDef);
+    fixtureDef.isSensor = false;
 }
 
 -(void)setupSprites {

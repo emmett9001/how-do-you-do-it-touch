@@ -20,6 +20,11 @@ typedef enum _collisionCategory {
     kHead, kHandL, kHandR, kGroin
 } kCollisionCategory;
 
+typedef enum _collisionFilters {
+    kTorsoCat = 0x0010,
+    kTorsoMask = 0xFFFF,
+} kCollisionFilter;
+
 @interface PhysicsDoll : NSObject
 {
     b2World *m_world;
@@ -29,7 +34,8 @@ typedef enum _collisionCategory {
     CCSprite *headSprite, *chestSprite, *hipsSprite, *armLSprite, *armRSprite, *legLSprite,
              *legRSprite, *footLSprite, *footRSprite;
     
-    b2Body *headBody, *torsoBody, *armLBody, *armRBody, *legLBody, *legRBody, *footLBody, *footRBody;
+    b2Body *headBody, *torsoTopBody, *torsoBottomBody, *armLBody, *armRBody, *legLBody, *legRBody, *footLBody, *footRBody, *groinSensor;
+    b2Body *midriff;
 }
 
 - (PhysicsDoll *)init:(CCScene *)scene withWorld:(NSValue *)world andType:(kDollType)type;

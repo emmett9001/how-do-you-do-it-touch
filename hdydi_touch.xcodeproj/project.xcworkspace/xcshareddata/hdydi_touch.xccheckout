@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8F138882-6333-47DE-A38D-B983B8A62B14</string>
+	<key>IDESourceControlProjectName</key>
+	<string>hdydi_touch</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>43DA590C-A3F7-4B58-A77E-6001E35A217D</key>
+		<string>https://github.com/emmett9001/how-do-you-do-it-touch.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>hdydi_touch.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>43DA590C-A3F7-4B58-A77E-6001E35A217D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/emmett9001/how-do-you-do-it-touch.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>43DA590C-A3F7-4B58-A77E-6001E35A217D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>43DA590C-A3F7-4B58-A77E-6001E35A217D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>hdydi_touch</string>
+		</dict>
+	</array>
+</dict>
+</plist>
