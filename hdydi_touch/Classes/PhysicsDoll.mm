@@ -24,14 +24,25 @@
 }
 
 -(void)update {
-    headSprite.position = ccp(headBody->GetPosition().x * PTM_RATIO, headBody->GetPosition().y * PTM_RATIO);
+    headSprite.position = ccp((headBody->GetPosition().x * PTM_RATIO / 2) - headSprite.contentSize.width/2,
+                              (headBody->GetPosition().y * PTM_RATIO / 2) + headSprite.contentSize.height/2);
     headSprite.rotation = headBody->GetAngle() * (180 / M_PI);
     
-    chestSprite.position = ccp(torsoTopBody->GetPosition().x * PTM_RATIO, torsoTopBody->GetPosition().y * PTM_RATIO);
+    chestSprite.position = ccp((torsoTopBody->GetPosition().x * PTM_RATIO / 2) - chestSprite.contentSize.width/2,
+                               (torsoTopBody->GetPosition().y * PTM_RATIO / 2) + chestSprite.contentSize.height/2);
     chestSprite.rotation = torsoTopBody->GetAngle() * (180 / M_PI);
     
-    hipsSprite.position = ccp(torsoBottomBody->GetPosition().x * PTM_RATIO, torsoBottomBody->GetPosition().y * PTM_RATIO);
+    hipsSprite.position = ccp((torsoBottomBody->GetPosition().x * PTM_RATIO / 2) - hipsSprite.contentSize.width/2,
+                              (torsoBottomBody->GetPosition().y * PTM_RATIO / 2) + hipsSprite.contentSize.height/2);
     hipsSprite.rotation = torsoBottomBody->GetAngle() * (180 / M_PI);
+    
+    armLSprite.position = ccp((armLBody->GetPosition().x * PTM_RATIO / 2) - armLSprite.contentSize.width/2,
+                              (armLBody->GetPosition().y * PTM_RATIO / 2) + armLSprite.contentSize.height/2);
+    armLSprite.rotation = armLBody->GetAngle() * (180 / M_PI);
+    
+    armRSprite.position = ccp((armRBody->GetPosition().x * PTM_RATIO / 2) - armRSprite.contentSize.width/2,
+                              (armRBody->GetPosition().y * PTM_RATIO / 2) + armRSprite.contentSize.height/2);
+    armRSprite.rotation = armRBody->GetAngle() * (180 / M_PI);
 }
 
 -(void)setupBodies {
@@ -97,6 +108,60 @@
     fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kGroin];
     groinSensor->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = false;
+    
+    // ARMS
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.4;
+    fixtureDef.restitution = 0.1;
+    filterData = b2Filter();
+    filterData.maskBits = kArmMask;
+    filterData.categoryBits = kArmCat;
+    fixtureDef.filter = filterData;
+    
+    float armSpace = 90;
+    float armHeight = 10;
+    if (self->type == kBarbie) {
+        armSpace = 70;
+        armHeight = 15;
+    }
+    
+    // LEFT ARM
+    box = new b2PolygonShape();
+    box->SetAsBox(56.0f / PTM_RATIO, 6.5f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX - armSpace) / PTM_RATIO, (startY - armHeight) / PTM_RATIO);
+    armLBody = self->m_world->CreateBody(&bodyDef);
+    armLBody->CreateFixture(&fixtureDef);
+    
+    // LEFT HAND SENSOR
+    box = new b2PolygonShape();
+    box->SetAsBox(10.0f / PTM_RATIO, 10.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX - 150) / PTM_RATIO, (startY - armHeight) / PTM_RATIO);
+    handLSensor = self->m_world->CreateBody(&bodyDef);
+    fixtureDef.isSensor = true;
+    fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kHandL];
+    handLSensor->CreateFixture(&fixtureDef);
+    fixtureDef.isSensor = false;
+    
+    // RIGHT ARM
+    box = new b2PolygonShape();
+    box->SetAsBox(56.0f / PTM_RATIO, 6.5f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX + armSpace) / PTM_RATIO, (startY - armHeight) / PTM_RATIO);
+    armRBody = self->m_world->CreateBody(&bodyDef);
+    armRBody->CreateFixture(&fixtureDef);
+    
+    // RIGHT HAND SENSOR
+    box = new b2PolygonShape();
+    box->SetAsBox(10.0f / PTM_RATIO, 10.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX + 150) / PTM_RATIO, (startY - armHeight) / PTM_RATIO);
+    handRSensor = self->m_world->CreateBody(&bodyDef);
+    fixtureDef.isSensor = true;
+    fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kHandR];
+    handRSensor->CreateFixture(&fixtureDef);
+    fixtureDef.isSensor = false;
 }
 
 -(void)setupSprites {
@@ -106,8 +171,8 @@
         headImg = @"barb_head.png";
         chestImg = @"barb_chest.png";
         hipsImg = @"barb_hips.png";
-        armLImg = @"barb_armL.png";
-        armRImg = @"barb_armR.png";
+        armRImg = @"barb_armL.png";
+        armLImg = @"barb_armR.png";
         legLImg = @"barb_legL.png";
         legRImg = @"barb_legR.png";
         footLImg = @"barb_footL.png";
@@ -116,8 +181,8 @@
         headImg = @"ken_head.png";
         chestImg = @"ken_chest.png";
         hipsImg = @"ken_hips.png";
-        armLImg = @"ken_armL.png";
-        armRImg = @"ken_armR.png";
+        armRImg = @"ken_armL.png";
+        armLImg = @"ken_armR.png";
         legLImg = @"ken_legL.png";
         legRImg = @"ken_legR.png";
         footLImg = @"ken_footL.png";

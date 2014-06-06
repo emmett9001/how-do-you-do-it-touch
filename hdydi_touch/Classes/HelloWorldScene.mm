@@ -59,8 +59,8 @@
     girlFace.position = ccp(girlBody.position.x + 20, girlBody.position.y + 120);
     [self addChild:girlFace];
     
-    self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie andStartPos:CGPointMake(100, 100)];
-    self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen andStartPos:CGPointMake(200, 100)];
+    self->barbie = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kBarbie andStartPos:CGPointMake(400, 300)];
+    self->ken = [[PhysicsDoll alloc] init:self withWorld:[NSValue valueWithPointer:self->_world] andType:kKen andStartPos:CGPointMake(700, 300)];
     
     [self schedule:@selector(tick:) interval:.03f];
     
@@ -79,7 +79,7 @@
 }
 
 - (void)setupWorld {
-    b2Vec2 gravity = b2Vec2(0, -9.8);
+    b2Vec2 gravity = b2Vec2(0, 0);
     _world = new b2World(gravity, true);
     
     /*GLESDraw *m_debugDraw = new GLESDraw( PTM_RATIO );
