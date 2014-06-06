@@ -16,6 +16,7 @@
         self->scene = _scene;
         self->type = _type;
         self->startPos = _startPos;
+        self->legSpacing = 18;
         
         [self setupBodies];
         [self setupSprites];
@@ -43,6 +44,14 @@
     armRSprite.position = ccp((armRBody->GetPosition().x * PTM_RATIO / 2) - armRSprite.contentSize.width/2,
                               (armRBody->GetPosition().y * PTM_RATIO / 2) + armRSprite.contentSize.height/2);
     armRSprite.rotation = armRBody->GetAngle() * (180 / M_PI);
+    
+    legLSprite.position = ccp((legLBody->GetPosition().x * PTM_RATIO / 2) - legLSprite.contentSize.width/2,
+                              (legLBody->GetPosition().y * PTM_RATIO / 2) + legLSprite.contentSize.height/2);
+    legLSprite.rotation = legLBody->GetAngle() * (180 / M_PI);
+    
+    legRSprite.position = ccp((legRBody->GetPosition().x * PTM_RATIO / 2) - legRSprite.contentSize.width/2,
+                              (legRBody->GetPosition().y * PTM_RATIO / 2) + legRSprite.contentSize.height/2);
+    legRSprite.rotation = legRBody->GetAngle() * (180 / M_PI);
 }
 
 -(void)setupBodies {
@@ -162,6 +171,35 @@
     fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kHandR];
     handRSensor->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = false;
+    
+    // LEGS
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.4;
+    fixtureDef.restitution = 0.1;
+    filterData = b2Filter();
+    filterData.maskBits = kBarbLegMask;
+    filterData.categoryBits = kBarbLegCat;
+    if (self->type == kKen) {
+        filterData.maskBits = kKenLegMask;
+        filterData.categoryBits = kKenLegCat;
+    }
+    fixtureDef.filter = filterData;
+    
+    // LEFT LEG
+    box = new b2PolygonShape();
+    box->SetAsBox(7.5 / PTM_RATIO, 66 / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX - self->legSpacing) / PTM_RATIO, (startY - 170) / PTM_RATIO);
+    legLBody = self->m_world->CreateBody(&bodyDef);
+    legLBody->CreateFixture(&fixtureDef);
+    
+    // RIGHT LEG
+    box = new b2PolygonShape();
+    box->SetAsBox(7.5 / PTM_RATIO, 66 / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX + self->legSpacing) / PTM_RATIO, (startY - 170) / PTM_RATIO);
+    legRBody = self->m_world->CreateBody(&bodyDef);
+    legRBody->CreateFixture(&fixtureDef);
 }
 
 -(void)setupSprites {
@@ -173,8 +211,8 @@
         hipsImg = @"barb_hips.png";
         armRImg = @"barb_armL.png";
         armLImg = @"barb_armR.png";
-        legLImg = @"barb_legL.png";
-        legRImg = @"barb_legR.png";
+        legRImg = @"barb_legL.png";
+        legLImg = @"barb_legR.png";
         footLImg = @"barb_footL.png";
         footRImg = @"barb_footR.png";
     } else if (self->type == kKen) {
@@ -183,8 +221,8 @@
         hipsImg = @"ken_hips.png";
         armRImg = @"ken_armL.png";
         armLImg = @"ken_armR.png";
-        legLImg = @"ken_legL.png";
-        legRImg = @"ken_legR.png";
+        legRImg = @"ken_legL.png";
+        legLImg = @"ken_legR.png";
         footLImg = @"ken_footL.png";
         footRImg = @"ken_footR.png";
     }

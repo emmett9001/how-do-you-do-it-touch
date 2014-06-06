@@ -24,7 +24,11 @@ typedef enum _collisionFilters {
     kTorsoCat = 0x0010,
     kTorsoMask = 0xFFFF,
     kArmMask = 0xFFFF,
-    kArmCat = 0x0020
+    kArmCat = 0x0020,
+    kBarbLegMask = 0x0002,
+    kBarbLegCat = 0x0002,
+    kKenLegMask = 0x0004,
+    kKenLegCat = 0x0004
 } kCollisionFilter;
 
 @interface PhysicsDoll : NSObject
@@ -38,6 +42,8 @@ typedef enum _collisionFilters {
     
     b2Body *headBody, *torsoTopBody, *torsoBottomBody, *armLBody, *armRBody, *legLBody, *legRBody, *footLBody, *footRBody, *groinSensor, *handLSensor, *handRSensor;
     b2Body *midriff;
+    
+    float legSpacing;
     
     CGPoint startPos;
 }
