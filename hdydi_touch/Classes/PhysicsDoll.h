@@ -22,7 +22,7 @@ typedef enum _collisionCategory {
 
 typedef enum _collisionFilters {
     kTorsoCat = 0x0010,
-    kTorsoMask = 0xFFFF,
+    kTorsoMask = 0xFFEF,
     kArmMask = 0xFFFF,
     kArmCat = 0x0020,
     kBarbLegMask = 0x0002,

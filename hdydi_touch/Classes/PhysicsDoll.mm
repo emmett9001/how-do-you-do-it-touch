@@ -81,11 +81,12 @@
     fixtureDef.restitution = 0.3;
     fixtureDef.isSensor = YES;
     fixtureDef.userData = (__bridge void *)[NSNumber numberWithInt:kHead];
-    float headY = 10;
+    float headY = 15, headX = 5;
     if (self->type == kKen) {
-        headY = 30;
+        headX = -25;
+        headY = 50;
     }
-    bodyDef.position.Set(startX / PTM_RATIO, (startY + headY) / PTM_RATIO);
+    bodyDef.position.Set((startX + headX) / PTM_RATIO, (startY + headY) / PTM_RATIO);
     headBody = self->m_world->CreateBody(&bodyDef);
     headBody->CreateFixture(&fixtureDef);
     fixtureDef.isSensor = NO;
@@ -108,7 +109,12 @@
     box = new b2PolygonShape();
     box->SetAsBox(22.0f / PTM_RATIO, 22.0f / PTM_RATIO);
     fixtureDef.shape = box;
-    bodyDef.position.Set(startX / PTM_RATIO, (startY - 85) / PTM_RATIO);
+    float torsoBottomY = -67, torsoBottomX = -3;
+    if (self->type == kKen) {
+        torsoBottomX = -13;
+        torsoBottomY = -80;
+    }
+    bodyDef.position.Set((startX + torsoBottomX) / PTM_RATIO, (startY + torsoBottomY) / PTM_RATIO);
     bodyDef.fixedRotation = true;
     torsoBottomBody = self->m_world->CreateBody(&bodyDef);
     torsoBottomBody->CreateFixture(&fixtureDef);
@@ -260,18 +266,6 @@
         footLImg = @"ken_footR.png";
     }
     
-    headSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:headImg]];
-    headSprite.position = ccp(0, 0);
-    [self->scene addChild:headSprite];
-    
-    chestSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:chestImg]];
-    chestSprite.position = ccp(0, 0);
-    [self->scene addChild:chestSprite];
-    
-    hipsSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:hipsImg]];
-    hipsSprite.position = ccp(0, 0);
-    [self->scene addChild:hipsSprite];
-    
     armLSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:armLImg]];
     armLSprite.position = ccp(0, 0);
     [self->scene addChild:armLSprite];
@@ -288,6 +282,14 @@
     legRSprite.position = ccp(0, 0);
     [self->scene addChild:legRSprite];
     
+    hipsSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:hipsImg]];
+    hipsSprite.position = ccp(0, 0);
+    [self->scene addChild:hipsSprite];
+    
+    chestSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:chestImg]];
+    chestSprite.position = ccp(0, 0);
+    [self->scene addChild:chestSprite];
+    
     footLSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:footLImg]];
     footLSprite.position = ccp(0, 0);
     [self->scene addChild:footLSprite];
@@ -295,6 +297,10 @@
     footRSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:footRImg]];
     footRSprite.position = ccp(0, 0);
     [self->scene addChild:footRSprite];
+    
+    headSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:headImg]];
+    headSprite.position = ccp(0, 0);
+    [self->scene addChild:headSprite];
 }
 
 @end

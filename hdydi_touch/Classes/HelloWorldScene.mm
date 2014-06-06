@@ -75,7 +75,11 @@
 }
 
 -(void) draw {
-    _world->DrawDebugData();
+    [super draw];
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position);
+    kmGLPushMatrix();
+    self->_world->DrawDebugData();
+    kmGLPopMatrix();
 }
 
 - (void)setupWorld {

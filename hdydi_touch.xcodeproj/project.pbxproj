@@ -16,7 +16,6 @@
 		AA322878192C19EB00E7978A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA322877192C19EB00E7978A /* Foundation.framework */; };
 		AA32287A192C19EB00E7978A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA322879192C19EB00E7978A /* CoreGraphics.framework */; };
 		AA32287C192C19EB00E7978A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA32287B192C19EB00E7978A /* CoreText.framework */; };
-		AA322882192C19EB00E7978A /* libObjectiveChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA32287F192C19EB00E7978A /* libObjectiveChipmunk.a */; };
 		AA322886192C19EB00E7978A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AA322885192C19EB00E7978A /* Default.png */; };
 		AA322888192C19EB00E7978A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA322887192C19EB00E7978A /* Default@2x.png */; };
 		AA32288A192C19EB00E7978A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA322889192C19EB00E7978A /* Default-568h@2x.png */; };
@@ -249,6 +248,7 @@
 		AA322C0B192C1C5F00E7978A /* b2PulleyJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE3192C1C5F00E7978A /* b2PulleyJoint.cpp */; };
 		AA322C0C192C1C5F00E7978A /* b2RevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE5192C1C5F00E7978A /* b2RevoluteJoint.cpp */; };
 		AA322C0D192C1C5F00E7978A /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA322BE7192C1C5F00E7978A /* b2WeldJoint.cpp */; };
+		AA4C257E1941485B001BB700 /* libObjectiveChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA32287F192C19EB00E7978A /* libObjectiveChipmunk.a */; };
 		AAF0C19D193A4EE1002EA6DD /* sprites_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF0C19B193A4EE1002EA6DD /* sprites_default.plist */; };
 		AAF0C19E193A4EE1002EA6DD /* sprites_default.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF0C19C193A4EE1002EA6DD /* sprites_default.png */; };
 		AAF0C1A1193A57DD002EA6DD /* PhysicsDoll.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAF0C1A0193A57DD002EA6DD /* PhysicsDoll.mm */; };
@@ -777,7 +777,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA322882192C19EB00E7978A /* libObjectiveChipmunk.a in Frameworks */,
+				AA4C257E1941485B001BB700 /* libObjectiveChipmunk.a in Frameworks */,
 				AA322870192C19EB00E7978A /* OpenAL.framework in Frameworks */,
 				AA322876192C19EB00E7978A /* UIKit.framework in Frameworks */,
 				AA32286C192C19EB00E7978A /* QuartzCore.framework in Frameworks */,
