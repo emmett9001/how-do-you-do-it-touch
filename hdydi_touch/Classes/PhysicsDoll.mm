@@ -52,6 +52,14 @@
     legRSprite.position = ccp((legRBody->GetPosition().x * PTM_RATIO / 2) - legRSprite.contentSize.width/2,
                               (legRBody->GetPosition().y * PTM_RATIO / 2) + legRSprite.contentSize.height/2);
     legRSprite.rotation = legRBody->GetAngle() * (180 / M_PI);
+    
+    footLSprite.position = ccp((footLBody->GetPosition().x * PTM_RATIO / 2) - footLSprite.contentSize.width/2,
+                              (footLBody->GetPosition().y * PTM_RATIO / 2) + footLSprite.contentSize.height/2);
+    footLSprite.rotation = footLBody->GetAngle() * (180 / M_PI);
+    
+    footRSprite.position = ccp((footRBody->GetPosition().x * PTM_RATIO / 2) - footRSprite.contentSize.width/2,
+                              (footRBody->GetPosition().y * PTM_RATIO / 2) + footRSprite.contentSize.height/2);
+    footRSprite.rotation = footRBody->GetAngle() * (180 / M_PI);
 }
 
 -(void)setupBodies {
@@ -200,6 +208,31 @@
     bodyDef.position.Set((startX + self->legSpacing) / PTM_RATIO, (startY - 170) / PTM_RATIO);
     legRBody = self->m_world->CreateBody(&bodyDef);
     legRBody->CreateFixture(&fixtureDef);
+    
+    // FEET
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.4;
+    fixtureDef.restitution = 0.1;
+    filterData = b2Filter();
+    filterData.maskBits = kFootMask;
+    filterData.categoryBits = kFootCat;
+    fixtureDef.filter = filterData;
+    
+    // LEFT FOOT
+    box = new b2PolygonShape();
+    box->SetAsBox(6.0f / PTM_RATIO, 10.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX - self->legSpacing) / PTM_RATIO, (startY - 247) / PTM_RATIO);
+    footLBody = self->m_world->CreateBody(&bodyDef);
+    footLBody->CreateFixture(&fixtureDef);
+    
+    // RIGHT FOOT
+    box = new b2PolygonShape();
+    box->SetAsBox(6.0f / PTM_RATIO, 10.0f / PTM_RATIO);
+    fixtureDef.shape = box;
+    bodyDef.position.Set((startX + self->legSpacing) / PTM_RATIO, (startY - 247) / PTM_RATIO);
+    footRBody = self->m_world->CreateBody(&bodyDef);
+    footRBody->CreateFixture(&fixtureDef);
 }
 
 -(void)setupSprites {
@@ -213,8 +246,8 @@
         armLImg = @"barb_armR.png";
         legRImg = @"barb_legL.png";
         legLImg = @"barb_legR.png";
-        footLImg = @"barb_footL.png";
-        footRImg = @"barb_footR.png";
+        footRImg = @"barb_footL.png";
+        footLImg = @"barb_footR.png";
     } else if (self->type == kKen) {
         headImg = @"ken_head.png";
         chestImg = @"ken_chest.png";
@@ -223,8 +256,8 @@
         armLImg = @"ken_armR.png";
         legRImg = @"ken_legL.png";
         legLImg = @"ken_legR.png";
-        footLImg = @"ken_footL.png";
-        footRImg = @"ken_footR.png";
+        footRImg = @"ken_footL.png";
+        footLImg = @"ken_footR.png";
     }
     
     headSprite = [CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:headImg]];

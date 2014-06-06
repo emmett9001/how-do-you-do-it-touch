@@ -28,7 +28,9 @@ typedef enum _collisionFilters {
     kBarbLegMask = 0x0002,
     kBarbLegCat = 0x0002,
     kKenLegMask = 0x0004,
-    kKenLegCat = 0x0004
+    kKenLegCat = 0x0004,
+    kFootMask = 0xFFEF,
+    kFootCat = 0x0008
 } kCollisionFilter;
 
 @interface PhysicsDoll : NSObject
